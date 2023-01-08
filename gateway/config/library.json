@@ -1,0 +1,62 @@
+[{
+  "path": "/library/book",
+  "method": "GET",
+  "rabbit": "rpc",
+  "role": []
+}, {
+  "path": "/library/book",
+  "method": "POST",
+  "rabbit": "rpc",
+  "role": []
+},{
+  "path": "/library/book",
+  "method": "PUT",
+  "rabbit": "rpc",
+  "role": []
+},{
+  "path": "/library/book",
+  "method": "DELETE",
+  "rabbit": "rpc",
+  "role": ["ADMIN"]
+}, {
+  "path": "/library/author",
+  "method": "GET",
+  "rabbit": "rpc",
+  "role": []
+}, {
+  "path": "/library/author",
+  "method": "POST",
+  "rabbit": "rpc",
+  "role": []
+},{
+  "path": "/library/author",
+  "method": "PUT",
+  "rabbit": "rpc",
+  "role": []
+},{
+  "path": "/library/author",
+  "method": "DELETE",
+  "rabbit": "rpc",
+  "role": ["ADMIN"]
+}, {
+    "path": "/library/book-type",
+    "method": "GET",
+    "rabbit": "rpc",
+    "role": []
+  }, {
+  "path": "/library/book-type",
+  "method": "POST",
+  "rabbit": "rpc",
+  "role": []
+},{
+  "path": "/library/book-type",
+  "method": "PUT",
+  "rabbit": "rpc",
+  "role": []
+},{
+  "path": "/library/book-type",
+  "method": "DELETE",
+  "rabbit": "rpc",
+  "role": ["ADMIN"]
+}
+]
