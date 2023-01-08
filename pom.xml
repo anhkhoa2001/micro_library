@@ -20,6 +20,10 @@
         <module>common</module>
         <module>user</module>
         <module>library</module>
+        <module>search</module>
+        <module>book-loan</module>
+        <module>report</module>
+        <module>cron-job</module>
     </modules>
 
     <dependencies>
