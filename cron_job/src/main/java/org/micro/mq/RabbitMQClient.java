@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class RabbitMQClient {
     @Autowired
     private AmqpTemplate amqpTemplate;
+
     public String callRpcService(String exchangeName, String queueName, String key, String msg) {
         try {
             log.info("callRpcService - exchangeName: {}, queueName: {}, key : {}, msg: {}",

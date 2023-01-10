@@ -6,15 +6,18 @@ import org.micro.config.SenderEmailService;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-@RabbitListener(queues = "${cron_job.worker.queue}")
+
 @Slf4j
+@Component
 public class WorkerServer {
     @Autowired
     private SenderEmailService senderEmailService;
-    @RabbitHandler
+
+    @RabbitListener(queues = "${cron_job.worker.queue}")
     public void receive(String message) {
         log.info("Đã nhân được message vào lúc " + new Date() + " có giá trị: " + message);
         String[] messages = message.split(SchedulerTask.TASK_SPLIT);

@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.Objects;
 
 @Data
 public class BorrowBookDTO {
@@ -57,5 +58,9 @@ public class BorrowBookDTO {
             e.printStackTrace();
         }
         return null;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

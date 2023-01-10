@@ -1,0 +1,520 @@
+{
+	"info": {
+		"_postman_id": "29808794-aa3b-4bfb-8f0f-721048e31a0a",
+		"name": "Library-Microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "18640120"
+	},
+	"item": [
+		{
+			"name": "ID Service",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"khoadamtam1@gmail.com\",\r\n    \"password\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{hostMicro}}/user/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{hostMicro}}/user/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Authority",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzMxNjk5MSwiZXhwIjoxNjczMzI4OTkxfQ._uhaPAO0X42ZJGHHqqtRkm-qu67vvjuvvgjzIbwOZeKyxvr-dM61ME8g-ufpQswEQ7Oru0Qkqikta9XC_rFYUQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ids\": [1, 2, 90]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{hostMicro}}/user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{hostMicro}}/user/get-by-id/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Authority",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Library Service",
+			"item": [
+				{
+					"name": "Get All Book",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{hostMicro}}/library/book"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{hostMicro}}/library/book"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Author",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Book Type",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzE4ODk1NywiZXhwIjoxNjczMjAwOTU3fQ.b9R0roc2GBxCSrVi-oGeUtGbpLRdtNRayp9QZ576ax89h1YJepkKbX9Y7DxZghRUs7hJjjDRkZpCGurmqAAYUQ",
+								"type": "text"
+							}
+						],
+						"url": "{{hostMicro}}/library/book-type"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{hostMicro}}/library/book"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Author",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzE4ODk1NywiZXhwIjoxNjczMjAwOTU3fQ.b9R0roc2GBxCSrVi-oGeUtGbpLRdtNRayp9QZ576ax89h1YJepkKbX9Y7DxZghRUs7hJjjDRkZpCGurmqAAYUQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tố Hữu\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{hostMicro}}/library/author"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Book Type",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzE4ODk1NywiZXhwIjoxNjczMjAwOTU3fQ.b9R0roc2GBxCSrVi-oGeUtGbpLRdtNRayp9QZ576ax89h1YJepkKbX9Y7DxZghRUs7hJjjDRkZpCGurmqAAYUQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sách Khoa học-Viễn tưởng\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{hostMicro}}/library/book-type"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Author",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzE4ODk1NywiZXhwIjoxNjczMjAwOTU3fQ.b9R0roc2GBxCSrVi-oGeUtGbpLRdtNRayp9QZ576ax89h1YJepkKbX9Y7DxZghRUs7hJjjDRkZpCGurmqAAYUQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sách Khoa học-Viễn tưởng\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{hostMicro}}/library/author"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Book",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzE4ODk1NywiZXhwIjoxNjczMjAwOTU3fQ.b9R0roc2GBxCSrVi-oGeUtGbpLRdtNRayp9QZ576ax89h1YJepkKbX9Y7DxZghRUs7hJjjDRkZpCGurmqAAYUQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Game of thrones\",\r\n    \"content\": \"abcd\",\r\n    \"type_id\": 1,\r\n    \"author_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{hostMicro}}/library/book"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Book Type",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzE4ODk1NywiZXhwIjoxNjczMjAwOTU3fQ.b9R0roc2GBxCSrVi-oGeUtGbpLRdtNRayp9QZ576ax89h1YJepkKbX9Y7DxZghRUs7hJjjDRkZpCGurmqAAYUQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sách Khoa học-Viễn tưởng\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{hostMicro}}/library/book-type"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Author",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzE4ODk1NywiZXhwIjoxNjczMjAwOTU3fQ.b9R0roc2GBxCSrVi-oGeUtGbpLRdtNRayp9QZ576ax89h1YJepkKbX9Y7DxZghRUs7hJjjDRkZpCGurmqAAYUQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{hostMicro}}/library/author?id=1",
+							"host": [
+								"{{hostMicro}}"
+							],
+							"path": [
+								"library",
+								"author"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Book",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzE4ODk1NywiZXhwIjoxNjczMjAwOTU3fQ.b9R0roc2GBxCSrVi-oGeUtGbpLRdtNRayp9QZ576ax89h1YJepkKbX9Y7DxZghRUs7hJjjDRkZpCGurmqAAYUQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{hostMicro}}/library/book?id=10",
+							"host": [
+								"{{hostMicro}}"
+							],
+							"path": [
+								"library",
+								"book"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Book Type Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzE4ODk1NywiZXhwIjoxNjczMjAwOTU3fQ.b9R0roc2GBxCSrVi-oGeUtGbpLRdtNRayp9QZ576ax89h1YJepkKbX9Y7DxZghRUs7hJjjDRkZpCGurmqAAYUQ",
+								"type": "text"
+							}
+						],
+						"url": "{{hostMicro}}/library/book-type"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book Loan",
+			"item": [
+				{
+					"name": "Borrow Book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{hostMicro}}/book_loan/borrow_book"
+					},
+					"response": []
+				},
+				{
+					"name": "Return Book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{hostMicro}}/book_loan/borrow_book"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Report",
+			"item": [
+				{
+					"name": "Report By Author",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzI0NDM3OSwiZXhwIjoxNjczMjU2Mzc5fQ.424Wj4QO2kIHhQjxiqLWE1JE1CmjsV0Xoa4pHWjxXeJrFattXfuOKeCvm_a-tACZJWLaYrjsePWhu18-BENqHQ",
+								"type": "text"
+							}
+						],
+						"url": "{{hostMicro}}/report/report-by-author"
+					},
+					"response": []
+				},
+				{
+					"name": "Report By Type",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzI0NDM3OSwiZXhwIjoxNjczMjU2Mzc5fQ.424Wj4QO2kIHhQjxiqLWE1JE1CmjsV0Xoa4pHWjxXeJrFattXfuOKeCvm_a-tACZJWLaYrjsePWhu18-BENqHQ",
+								"type": "text"
+							}
+						],
+						"url": "{{hostMicro}}/report/report-by-type"
+					},
+					"response": []
+				},
+				{
+					"name": "Report By Character",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzI0NDM3OSwiZXhwIjoxNjczMjU2Mzc5fQ.424Wj4QO2kIHhQjxiqLWE1JE1CmjsV0Xoa4pHWjxXeJrFattXfuOKeCvm_a-tACZJWLaYrjsePWhu18-BENqHQ",
+								"type": "text"
+							}
+						],
+						"url": "{{hostMicro}}/report/report-by-character"
+					},
+					"response": []
+				},
+				{
+					"name": "Report Number Most Book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzI0NDM3OSwiZXhwIjoxNjczMjU2Mzc5fQ.424Wj4QO2kIHhQjxiqLWE1JE1CmjsV0Xoa4pHWjxXeJrFattXfuOKeCvm_a-tACZJWLaYrjsePWhu18-BENqHQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"start\": \"2022-10-10\",\r\n    \"end\": \"2023-10-10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{hostMicro}}/report/report-most-borrow"
+					},
+					"response": []
+				},
+				{
+					"name": "Report Most Book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzI0NDM3OSwiZXhwIjoxNjczMjU2Mzc5fQ.424Wj4QO2kIHhQjxiqLWE1JE1CmjsV0Xoa4pHWjxXeJrFattXfuOKeCvm_a-tACZJWLaYrjsePWhu18-BENqHQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"start\": \"2022-10-10\",\r\n    \"end\": \"2023-10-10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{hostMicro}}/report/report-most-book"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Sync Book",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtMUBnbWFpbC5jb20iLCJpYXQiOjE2NzMzMTg2NjIsImV4cCI6MTY3MzMzMDY2Mn0.tHVTp5mpHMnwawIrkWtP6xEUmMRD8UKQDRnWXbFlY_fHzW2zkOQVIT4e2HI-gKQbS1Vl_xRtm_T4wW63NnXoGw",
+								"type": "text"
+							}
+						],
+						"url": "{{hostMicro}}/search/sync-book"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book By Name In ElasticSearch",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtMUBnbWFpbC5jb20iLCJpYXQiOjE2NzMzMTg2NjIsImV4cCI6MTY3MzMzMDY2Mn0.tHVTp5mpHMnwawIrkWtP6xEUmMRD8UKQDRnWXbFlY_fHzW2zkOQVIT4e2HI-gKQbS1Vl_xRtm_T4wW63NnXoGw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{hostMicro}}/search/get-book-by-name?name=Cô bé",
+							"host": [
+								"{{hostMicro}}"
+							],
+							"path": [
+								"search",
+								"get-book-by-name"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Cô bé"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CronJob",
+			"item": []
+		}
+	]
+}
