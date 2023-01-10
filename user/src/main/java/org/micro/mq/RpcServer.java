@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.micro.constant.ResourcePath;
 import org.micro.controller.LoginController;
+import org.micro.controller.UserController;
 import org.micro.dto.RequestMessage;
 import org.micro.dto.ResponseMessage;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -22,6 +23,9 @@ public class RpcServer {
 
     @Autowired
     private LoginController loginController;
+
+    @Autowired
+    private UserController userController;
 
     @RabbitListener(queues = "${user.rpc.queue}")
     public String processService(String json) {
@@ -45,10 +49,8 @@ public class RpcServer {
 
                 switch (request.getRequestMethod()) {
                     case "GET":
-                        if("/user".equalsIgnoreCase(requestPath)) {
-                            response = loginController.getAllUser(requestPath, headerParam);
-                        } else if(requestPath.contains("/user/get-by-id")) {
-                            response = loginController.getById(requestPath, urlParam, headerParam);
+                        if(requestPath.contains("/user/get-by-id")) {
+                            response = userController.getById(requestPath, urlParam, headerParam);
                         }
                         break;
                     case "POST":
@@ -59,7 +61,9 @@ public class RpcServer {
                         } else if("/user/authority".equalsIgnoreCase(requestPath)) {
                             response = loginController.addAuthority(requestPath, headerParam, bodyParam, role);
                         } else if("/user/authorization".equalsIgnoreCase(requestPath)) {
-                            response = loginController.authorization(requestPath, headerParam, bodyParam, role);
+                            response = loginController.authorization(requestPath, headerParam);
+                        } else if("/user".equalsIgnoreCase(requestPath)) {
+                            response = userController.getAllUser(requestPath, headerParam, bodyParam);
                         }
                         break;
                     case "PUT":

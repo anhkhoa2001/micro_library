@@ -1,0 +1,14 @@
+[
+  {
+    "path": "/search/get-book-by-name",
+    "method": "GET",
+    "rabbit": "rpc",
+    "role": []
+  },
+  {
+    "path": "/search/sync-book",
+    "method": "GET",
+    "rabbit": "rpc",
+    "role": []
+  }
+]

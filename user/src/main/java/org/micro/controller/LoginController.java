@@ -126,7 +126,7 @@ public class LoginController {
             response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "Thêm thông tin tài khoản vào body",
                     new MessageContent(HttpStatus.BAD_REQUEST.value(), "Thêm thông tin tài khoản vào body", null));
         } else {
-            response = authorization(requestPath, headerParam, bodyParam, role);
+            response = authorization(requestPath, headerParam);
             if(response.getStatus() == 200) {
                 String name_authority = (String) bodyParam.get("name");
 
@@ -156,67 +156,14 @@ public class LoginController {
         return response;
     }
 
-    public ResponseMessage getAllUser(String requestPath, Map<String, String> headerParam) {
+    public ResponseMessage authorization(String requestPath, Map<String, String> headerParam) {
         ResponseMessage response = new ResponseMessage();
-        response = authorization(requestPath, headerParam, null, new HashSet<>());
-        if(response.getStatus() == 200) {
-            List<UserModel> userModels = userService.getAll();
-            if(userModels == null) {
-                response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi xảy ra",
-                        new MessageContent(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi xảy ra", null));
-                return response;
-            } else if(userModels.isEmpty()) {
-                response = new ResponseMessage(HttpStatus.NO_CONTENT.value(), "Không có dữ liệu",
-                        new MessageContent(HttpStatus.NO_CONTENT.value(), "Không có dữ liệu", null));
-                return response;
-            } else {
-                return new ResponseMessage(new MessageContent(userModels));
-            }
-        }
-        return response;
-    }
-
-    public ResponseMessage getById(String requestPath, Map<String, String> urlParam,
-                                   Map<String, String> headerParam) {
-        ResponseMessage response = new ResponseMessage();
-        if (urlParam == null || urlParam.isEmpty()) {
-            response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "Thêm thông tin ID vào url",
-                    new MessageContent(HttpStatus.BAD_REQUEST.value(), "Thêm thông tin ID vào url", null));
-        } else {
-            response = authorization(requestPath, headerParam, null, new HashSet<>());
-            if(response.getStatus() == 200) {
-                String id = urlParam.get("id");
-                if(NumberUtils.isNumber(id)) {
-                    UserModel userModel = userService.getById(Integer.parseInt(id));
-
-                    if(userModel != null) {
-                        return new ResponseMessage(new MessageContent(userModel));
-                    } else {
-                        response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi xảy ra",
-                                new MessageContent(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi xảy ra", null));
-                    }
-                } else {
-                    response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "ID không hợp lệ",
-                            new MessageContent(HttpStatus.BAD_REQUEST.value(), "ID không hợp lệ", null));
-                }
-            }
-        }
-
-        return response;
-    }
-
-    public ResponseMessage authorization(String requestPath, Map<String, String> headerParam,
-                                        Map<String, Object> bodyParam, Set<String> role) {
-        ResponseMessage response = new ResponseMessage();
-        role = role == null ? new HashSet<>() : role;
         String token = (String) headerParam.get("authorization");
         if(token != null && token.contains("Bearer ")) {
             token = token.replace("Bearer ", "");
             UserModel userModel = userService.getByToken(token);
             if(userModel != null ) {
-                if((role.size() == 0) || userModel.getAuthorities().contains(role.stream().map(Authority::new).collect(Collectors.toSet()))) {
-                    return new ResponseMessage(new MessageContent(userModel));
-                }
+                return new ResponseMessage(new MessageContent(userModel));
             }
         }
         response = new ResponseMessage(HttpStatus.UNAUTHORIZED.value(), "Vui lòng đăng nhập",

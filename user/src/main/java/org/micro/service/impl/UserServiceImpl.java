@@ -66,6 +66,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserModel> getUsersById(List<Integer> ids) {
+        try {
+            return userRepository.findUserModelsByIdIsIn(ids);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
     public UserDetailCustomize loadUserByUsername(String username) {
         try {
             UserModel userModel = getUserByUsername(username);

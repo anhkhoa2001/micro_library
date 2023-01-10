@@ -18,4 +18,14 @@ public class BookDTO {
         this.author_id = author_id;
         this.type_id = type_id;
     }
+
+    public BookDTO() {}
+
+    public BookDTO(Integer id, String name, String content, Integer author_id, Integer type_id) {
+        this.id = id;
+        this.name = name;
+        this.content = content;
+        this.author_id = author_id;
+        this.type_id = type_id;
+    }
 }

@@ -7,8 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="search" />
         <module name="library" />
+        <module name="cron_job" />
         <module name="common" />
+        <module name="report" />
+        <module name="book_loan" />
         <module name="user" />
         <module name="gateway" />
       </profile>
@@ -16,9 +20,13 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="book_loan" options="-parameters" />
       <module name="common" options="-parameters" />
+      <module name="cron_job" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="library" options="-parameters" />
+      <module name="report" options="-parameters" />
+      <module name="search" options="-parameters" />
       <module name="user" options="-parameters" />
     </option>
   </component>

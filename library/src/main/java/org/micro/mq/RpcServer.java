@@ -6,6 +6,7 @@ import org.micro.constant.ResourcePath;
 import org.micro.controller.AuthorController;
 import org.micro.controller.BookController;
 import org.micro.controller.BookTypeController;
+import org.micro.controller.StatisticalBookController;
 import org.micro.dto.RequestMessage;
 import org.micro.dto.ResponseMessage;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -30,6 +31,9 @@ public class RpcServer {
 
     @Autowired
     private BookTypeController bookTypeController;
+
+    @Autowired
+    private StatisticalBookController statisticalBookController;
 
     @RabbitListener(queues = "${library.rpc.queue}")
     public String processService(String json) {
@@ -59,6 +63,14 @@ public class RpcServer {
                             response = authorController.getAll(requestPath, headerParam);
                         } else if("/library/book-type".equalsIgnoreCase(requestPath)) {
                             response = bookTypeController.getAll(requestPath, headerParam);
+                        } else if("/library/book/get-by-id".equalsIgnoreCase(requestPath)) {
+                            response = bookController.getById(requestPath, headerParam, urlParam);
+                        } else if("/library/statistical/character".equalsIgnoreCase(requestPath)) {
+                            response = statisticalBookController.statisCharacter(requestPath, headerParam);
+                        } else if("/library/statistical/type".equalsIgnoreCase(requestPath)) {
+                            response = statisticalBookController.statisType(requestPath, headerParam);
+                        } else if("/library/statistical/author".equalsIgnoreCase(requestPath)) {
+                            response = statisticalBookController.statisAuthor(requestPath, headerParam);
                         }
                         break;
                     case "POST":
@@ -68,6 +80,8 @@ public class RpcServer {
                             response = authorController.addAuthor(requestPath, headerParam, bodyParam);
                         } else if("/library/book-type".equalsIgnoreCase(requestPath)) {
                             response = bookTypeController.addBookType(requestPath, headerParam, bodyParam);
+                        } else if("/library/book/get-by-ids".equalsIgnoreCase(requestPath)) {
+                            response = bookController.getByIds(requestPath, headerParam, bodyParam);
                         }
                         break;
                     case "PUT":

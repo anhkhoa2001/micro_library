@@ -21,9 +21,9 @@
         <module>user</module>
         <module>library</module>
         <module>search</module>
-        <module>book-loan</module>
+        <module>book_loan</module>
         <module>report</module>
-        <module>cron-job</module>
+        <module>cron_job</module>
     </modules>
 
     <dependencies>

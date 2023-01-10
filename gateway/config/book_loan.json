@@ -1,0 +1,38 @@
+[
+  {
+    "path": "/book_loan/borrow_book",
+    "method": "GET",
+    "rabbit": "rpc",
+    "role": []
+  },
+  {
+    "path": "/book_loan/borrow_book",
+    "method": "POST",
+    "rabbit": "rpc",
+    "role": []
+  },
+  {
+    "path": "/book_loan/return_book",
+    "method": "POST",
+    "rabbit": "rpc",
+    "role": []
+  },
+  {
+    "path": "/book_loan/get-count-by-time",
+    "method": "POST",
+    "rabbit": "rpc",
+    "role": []
+  },
+  {
+    "path": "/book_loan/get-id-most-borrow",
+    "method": "POST",
+    "rabbit": "rpc",
+    "role": []
+  },
+  {
+    "path": "/book_loan/get-books-expired",
+    "method": "GET",
+    "rabbit": "rpc",
+    "role": []
+  }
+]

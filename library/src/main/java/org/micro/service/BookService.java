@@ -15,9 +15,7 @@ public interface BookService {
     Book update(Book book);
     Boolean delete(Integer id);
     Book getByName(String name);
-
     List<Book> getBooksByAuthor_Id(Integer author_id);
-
     List<Book> getBooksByBookType_Type_id(Integer type_id);
-
+    List<Book> getBooksByIdIsIn(List<Integer> ids);
 }

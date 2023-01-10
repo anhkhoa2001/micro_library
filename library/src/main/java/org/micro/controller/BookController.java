@@ -1,13 +1,12 @@
 package org.micro.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.math.NumberUtils;
 import org.micro.dto.AuthorizationDTO;
 import org.micro.dto.BookDTO;
 import org.micro.dto.MessageContent;
 import org.micro.dto.ResponseMessage;
-import org.micro.model.Author;
 import org.micro.model.Book;
-import org.micro.mq.RabbitMQClient;
 import org.micro.service.AuthorService;
 import org.micro.service.BookService;
 import org.micro.service.BookTypeService;
@@ -16,10 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashSet;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @RestController
 @Slf4j
@@ -52,6 +51,43 @@ public class BookController {
             } else {
                 return new ResponseMessage(new MessageContent(books));
             }
+        }
+
+        return response;
+    }
+
+    public ResponseMessage getById(String requestPath, Map<String, String> headerParam, Map<String, String> urlParam) {
+        ResponseMessage response = new ResponseMessage();
+        AuthorizationDTO dto = validation.validateHeader(headerParam);
+        if(dto == null) {
+            response = new ResponseMessage(HttpStatus.UNAUTHORIZED.value(), "Vui lòng đăng nhập",
+                    new MessageContent(HttpStatus.UNAUTHORIZED.value(), "Vui lòng đăng nhập", null));
+
+        } else {
+            if(urlParam == null || urlParam.isEmpty()) {
+                response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "Thêm thông tin vào url",
+                        new MessageContent(HttpStatus.BAD_REQUEST.value(), "Thêm thông tin vào url", null));
+                return response;
+            } else {
+                String id = urlParam.get("id");
+                if(id == null || !NumberUtils.isNumber(id)) {
+                    response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "ID trong url không hợp lệ",
+                            new MessageContent(HttpStatus.BAD_REQUEST.value(), "ID trong url không hợp lệ", null));
+                } else {
+                    Book book = bookService.findById(Integer.parseInt(id));
+
+                    if(book != null) {
+                        BookDTO bookDTO =  new BookDTO(book.getId(), book.getName(), book.getContent(),
+                                book.getAuthor().getId(), book.getBookType().getType_id());
+
+                        return new ResponseMessage(new MessageContent(bookDTO));
+                    }
+                    response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "Lấy sách theo ID thất bại",
+                            new MessageContent(HttpStatus.BAD_REQUEST.value(), "Lấy sách theo ID thất bại", null));
+                }
+
+            }
+
         }
 
         return response;
@@ -183,6 +219,45 @@ public class BookController {
                             new MessageContent(HttpStatus.BAD_REQUEST.value(), "Xóa sách thất bại", null));
                 }
             }
+        }
+
+        return response;
+    }
+
+    public ResponseMessage getByIds(String requestPath, Map<String, String> headerParam, Map<String, Object> bodyParam) {
+        ResponseMessage response = new ResponseMessage();
+        AuthorizationDTO dto = validation.validateHeader(headerParam);
+        if(dto == null) {
+            response = new ResponseMessage(HttpStatus.UNAUTHORIZED.value(), "Vui lòng đăng nhập",
+                    new MessageContent(HttpStatus.UNAUTHORIZED.value(), "Vui lòng đăng nhập", null));
+
+        } else {
+            if(bodyParam == null || bodyParam.isEmpty()) {
+                response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "Thêm thông tin vào body",
+                        new MessageContent(HttpStatus.BAD_REQUEST.value(), "Thêm thông tin vào body", null));
+                return response;
+            } else {
+                Object obj = bodyParam.get("ids");
+                if(obj == null || obj.getClass() != ArrayList.class) {
+                    response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "Thông tin body không hợp lệ",
+                            new MessageContent(HttpStatus.BAD_REQUEST.value(), "Thông tin body không hợp lệ", null));
+
+                } else {
+                    List<Integer> ids = (List<Integer>) obj;
+                    List<Book> users = bookService.getBooksByIdIsIn(ids);
+                    if(users == null) {
+                        response = new ResponseMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Lấy dữ liệu bị lỗi",
+                                new MessageContent(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Lấy dữ liệu bị lỗi", null));
+                    } else if(users.isEmpty()) {
+                        response = new ResponseMessage(HttpStatus.NO_CONTENT.value(), "Không có dữ liệu",
+                                new MessageContent(HttpStatus.NO_CONTENT.value(), "Không có dữ liệu", null));
+                    } else {
+                        return new ResponseMessage(new MessageContent(users));
+                    }
+                }
+
+            }
+
         }
 
         return response;

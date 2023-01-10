@@ -10,11 +10,27 @@
     </parent>
 
     <artifactId>report</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.micro</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+    <build>
+        <resources>
+            <resource>
+                <directory>./config</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
 </project>

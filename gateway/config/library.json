@@ -4,6 +4,16 @@
   "rabbit": "rpc",
   "role": []
 }, {
+  "path": "/library/book/get-by-id",
+  "method": "GET",
+  "rabbit": "rpc",
+  "role": []
+},{
+  "path": "/library/book/get-by-ids",
+  "method": "POST",
+  "rabbit": "rpc",
+  "role": []
+},{
   "path": "/library/book",
   "method": "POST",
   "rabbit": "rpc",
@@ -58,5 +68,20 @@
   "method": "DELETE",
   "rabbit": "rpc",
   "role": ["ADMIN"]
+},{
+  "path": "/library/statistical/character",
+  "method": "GET",
+  "rabbit": "rpc",
+  "role": []
+},{
+  "path": "/library/statistical/author",
+  "method": "GET",
+  "rabbit": "rpc",
+  "role": []
+},{
+  "path": "/library/statistical/type",
+  "method": "GET",
+  "rabbit": "rpc",
+  "role": []
 }
 ]

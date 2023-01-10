@@ -1,0 +1,32 @@
+[
+  {
+    "path": "/report/report-by-author",
+    "method": "GET",
+    "rabbit": "rpc",
+    "role": []
+  },
+  {
+    "path": "/report/report-by-type",
+    "method": "GET",
+    "rabbit": "rpc",
+    "role": []
+  },
+  {
+    "path": "/report/report-by-character",
+    "method": "GET",
+    "rabbit": "rpc",
+    "role": []
+  },
+  {
+    "path": "/report/report-most-borrow",
+    "method": "POST",
+    "rabbit": "rpc",
+    "role": []
+  },
+  {
+    "path": "/report/report-most-book",
+    "method": "POST",
+    "rabbit": "rpc",
+    "role": []
+  }
+]

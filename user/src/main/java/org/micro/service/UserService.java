@@ -12,4 +12,5 @@ public interface UserService extends UserDetailsService {
     UserModel getById(Integer id);
     UserModel getByToken(String token);
     List<UserModel> getAll();
+    List<UserModel> getUsersById(List<Integer> ids);
 }

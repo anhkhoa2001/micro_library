@@ -108,4 +108,15 @@ public class BookServiceImpl implements BookService {
         }
     }
 
+    @Override
+    public List<Book> getBooksByIdIsIn(List<Integer> ids) {
+        try {
+            return bookRepository.getBooksByIdIsIn(ids);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 }

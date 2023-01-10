@@ -21,7 +21,7 @@
     "role": ["ADMIN"]
   }, {
     "path": "/user",
-    "method": "GET",
+    "method": "POST",
     "rabbit": "rpc",
     "role": []
   },{
