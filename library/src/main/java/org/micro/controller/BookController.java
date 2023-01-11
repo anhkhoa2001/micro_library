@@ -32,7 +32,8 @@ public class BookController {
     @Autowired
     private AuthorService authorService;
 
-    public ResponseMessage getAll(String requestPath, Map<String, String> headerParam) {
+    public ResponseMessage getAll(String requestPath, Map<String, String> headerParam,
+                                  Map<String, String> urlParam) {
         ResponseMessage response = new ResponseMessage();
         AuthorizationDTO dto = validation.validateHeader(headerParam);
         if(dto == null) {
@@ -40,14 +41,27 @@ public class BookController {
                     new MessageContent(HttpStatus.UNAUTHORIZED.value(), "Vui lòng đăng nhập", null));
 
         } else {
-            List<Book> books = bookService.getAll();
+            List<Book> books = new ArrayList<>();
+            if(urlParam == null || urlParam.isEmpty()) {
+                books = bookService.getAll();
+            } else {
+                try {
+                    Integer limit = Integer.parseInt(urlParam.get("lim"));
+                    Integer offset = Integer.parseInt(urlParam.get("off"));
+
+                    books = bookService.getBooksByPage(limit, offset);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    books = null;
+                }
+            }
+
             if(books == null) {
                 response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi xảy ra",
                         new MessageContent(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi xảy ra", null));
             } else if(books.isEmpty()) {
                 response = new ResponseMessage(HttpStatus.NO_CONTENT.value(), "Không có dữ liệu",
                         new MessageContent(HttpStatus.NO_CONTENT.value(), "Không có dữ liệu", null));
-
             } else {
                 return new ResponseMessage(new MessageContent(books));
             }

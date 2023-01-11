@@ -13,4 +13,6 @@ public interface BookTypeService {
     BookType findById(Integer id);
     Boolean delete(Integer id);
     BookType getByName(String name);
+
+    List<BookType> getBookTypesByPage(Integer limit, Integer offset);
 }

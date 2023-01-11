@@ -6,6 +6,7 @@ import org.micro.dto.MessageContent;
 import org.micro.dto.ResponseMessage;
 import org.micro.model.Author;
 import org.micro.model.Book;
+import org.micro.model.BookType;
 import org.micro.service.AuthorService;
 import org.micro.service.BookService;
 import org.micro.service.BookTypeService;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +32,8 @@ public class AuthorController {
     @Autowired
     private BookService bookService;
 
-    public ResponseMessage getAll(String requestPath, Map<String, String> headerParam) {
+    public ResponseMessage getAll(String requestPath, Map<String, String> headerParam,
+                                  Map<String, String> urlParam) {
         ResponseMessage response = new ResponseMessage();
         AuthorizationDTO dto = validation.validateHeader(headerParam);
         if(dto == null) {
@@ -38,7 +41,20 @@ public class AuthorController {
                     new MessageContent(HttpStatus.UNAUTHORIZED.value(), "Vui lòng đăng nhập", null));
 
         } else {
-            List<Author> authors = authorService.getAll();
+            List<Author> authors = new ArrayList<>();
+            if(urlParam == null || urlParam.isEmpty()) {
+                authors = authorService.getAll();
+            } else {
+                try {
+                    Integer limit = Integer.parseInt(urlParam.get("lim"));
+                    Integer offset = Integer.parseInt(urlParam.get("off"));
+
+                    authors = authorService.getAuthorsByPage(limit, offset);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    authors = null;
+                }
+            }
             if(authors == null) {
                 response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi xảy ra",
                         new MessageContent(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi xảy ra", null));

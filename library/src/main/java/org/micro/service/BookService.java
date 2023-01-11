@@ -18,4 +18,6 @@ public interface BookService {
     List<Book> getBooksByAuthor_Id(Integer author_id);
     List<Book> getBooksByBookType_Type_id(Integer type_id);
     List<Book> getBooksByIdIsIn(List<Integer> ids);
+
+    List<Book> getBooksByPage(Integer limit, Integer offset);
 }

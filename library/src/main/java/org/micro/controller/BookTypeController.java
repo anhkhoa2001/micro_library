@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,8 @@ public class BookTypeController {
     @Autowired
     private BookService bookService;
 
-    public ResponseMessage getAll(String requestPath, Map<String, String> headerParam) {
+    public ResponseMessage getAll(String requestPath, Map<String, String> headerParam,
+                                  Map<String, String> urlParam) {
         ResponseMessage response = new ResponseMessage();
         AuthorizationDTO dto = validation.validateHeader(headerParam);
         if(dto == null) {
@@ -38,7 +40,20 @@ public class BookTypeController {
                     new MessageContent(HttpStatus.UNAUTHORIZED.value(), "Vui lòng đăng nhập", null));
 
         } else {
-            List<BookType> bookTypes = bookTypeService.getAll();
+            List<BookType> bookTypes = new ArrayList<>();
+            if(urlParam == null || urlParam.isEmpty()) {
+                bookTypes = bookTypeService.getAll();
+            } else {
+                try {
+                    Integer limit = Integer.parseInt(urlParam.get("lim"));
+                    Integer offset = Integer.parseInt(urlParam.get("off"));
+
+                    bookTypes = bookTypeService.getBookTypesByPage(limit, offset);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    bookTypes = null;
+                }
+            }
             if(bookTypes == null) {
                 response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi xảy ra",
                         new MessageContent(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi xảy ra", null));

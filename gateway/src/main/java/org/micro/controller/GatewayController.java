@@ -121,7 +121,7 @@ public class GatewayController {
             String rabbitType = GatewayConfig.SERVICE_PATH_MAP.get(requestPath).getRabbit_type();
             Set<String> role = GatewayConfig.SERVICE_PATH_MAP.get(requestPath).getRole();
             RequestMessage request = new RequestMessage(requestMethod, requestPath,
-                    urlParamMap, pathParam, bodyParamMap, headerParamMap, role);
+                    urlParamMap, pathParam, bodyParamMap, headerParamMap);
             log.info("Get Rabbit type for {} {} ==> Rabbit: {}", requestMethod,
                     requestPath.replace(GatewayConfig.API_ROOT_PATH, "/"), rabbitType);
             if ("rpc".equalsIgnoreCase(rabbitType)) {

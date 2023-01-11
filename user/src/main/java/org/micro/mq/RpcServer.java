@@ -44,7 +44,6 @@ public class RpcServer {
                 String pathParam = request.getPathParam();
                 Map<String, Object> bodyParam = request.getBodyParam();
                 Map<String, String> headerParam = request.getHeaderParam();
-                Set<String> role = request.getRole();
                 log.info(" [-->] Server received requestPath =========>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + requestPath);
 
                 switch (request.getRequestMethod()) {
@@ -59,7 +58,7 @@ public class RpcServer {
                         } else if("/user/register".equalsIgnoreCase(requestPath)) {
                             response = loginController.register(requestPath, headerParam, bodyParam);
                         } else if("/user/authority".equalsIgnoreCase(requestPath)) {
-                            response = loginController.addAuthority(requestPath, headerParam, bodyParam, role);
+                            response = loginController.addAuthority(requestPath, headerParam, bodyParam);
                         } else if("/user/authorization".equalsIgnoreCase(requestPath)) {
                             response = loginController.authorization(requestPath, headerParam);
                         } else if("/user".equalsIgnoreCase(requestPath)) {

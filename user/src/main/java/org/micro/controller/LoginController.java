@@ -120,7 +120,7 @@ public class LoginController {
     }
 
     public ResponseMessage addAuthority(String requestPath, Map<String, String> headerParam,
-                                        Map<String, Object> bodyParam, Set<String> role) {
+                                        Map<String, Object> bodyParam) {
         ResponseMessage response = new ResponseMessage();
         if (bodyParam == null || bodyParam.isEmpty()) {
             response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "Thêm thông tin tài khoản vào body",

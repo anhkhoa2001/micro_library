@@ -19,8 +19,8 @@ public class StatisticalServiceImpl implements StatisticalService {
     @Override
     public List<StatisticalByAuthor> getAllByAuthor() {
         try {
-            String query = "select ra.name as author_name, b.author_id, count(b.name) as total from li_book b\n" +
-                    " inner join li_author ra on b.author_id = ra.id\n" +
+            String query = "select ra.name as author_name, b.author_id, count(b.name) as total from rest_book b\n" +
+                    " inner join rest_author ra on b.author_id = ra.id\n" +
                     " group by b.author_id;";
             List<Object[]> result = entityManager.createNativeQuery(query).getResultList();
             List<StatisticalByAuthor> sbas = new ArrayList<>();
@@ -43,8 +43,8 @@ public class StatisticalServiceImpl implements StatisticalService {
     @Override
     public List<StatisticalByType> getAllByType() {
         try {
-            String query = "select b.book_type_id, rb.name, count(b.name) as total from li_book b\n" +
-                    " inner join li_book_type rb on b.book_type_id = rb.type_id\n" +
+            String query = "select b.book_type_id, rb.name, count(b.name) as total from rest_book b\n" +
+                    " inner join rest_book_type rb on b.book_type_id = rb.type_id\n" +
                     " group by b.book_type_id;";
             List<Object[]> result = entityManager.createNativeQuery(query).getResultList();
             List<StatisticalByType> sbts = new ArrayList<>();
@@ -69,7 +69,7 @@ public class StatisticalServiceImpl implements StatisticalService {
     public List<StatisticalByCharacter> getAllByFirstCharacter() {
         List<StatisticalByCharacter> result = new ArrayList<>();
         for(char c = 'A'; c <= 'Z'; ++c){
-            String query = "select count(*) from li_book b where upper(name) like '" + c + "%'";
+            String query = "select count(*) from rest_book b where upper(name) like '" + c + "%'";
             Object object = entityManager.createNativeQuery(query)
                     .getSingleResult();
 

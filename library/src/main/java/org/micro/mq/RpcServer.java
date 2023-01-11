@@ -52,17 +52,16 @@ public class RpcServer {
                 String pathParam = request.getPathParam();
                 Map<String, Object> bodyParam = request.getBodyParam();
                 Map<String, String> headerParam = request.getHeaderParam();
-                Set<String> role = request.getRole();
                 log.info(" [-->] Server received requestPath =========>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + requestPath);
 
                 switch (request.getRequestMethod()) {
                     case "GET":
                         if("/library/book".equalsIgnoreCase(requestPath)) {
-                            response = bookController.getAll(requestPath, headerParam);
+                            response = bookController.getAll(requestPath, headerParam, urlParam);
                         } else if("/library/author".equalsIgnoreCase(requestPath)) {
-                            response = authorController.getAll(requestPath, headerParam);
+                            response = authorController.getAll(requestPath, headerParam, urlParam);
                         } else if("/library/book-type".equalsIgnoreCase(requestPath)) {
-                            response = bookTypeController.getAll(requestPath, headerParam);
+                            response = bookTypeController.getAll(requestPath, headerParam, urlParam);
                         } else if("/library/book/get-by-id".equalsIgnoreCase(requestPath)) {
                             response = bookController.getById(requestPath, headerParam, urlParam);
                         } else if("/library/statistical/character".equalsIgnoreCase(requestPath)) {

@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "li_author")
+@Table(name = "rest_author")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

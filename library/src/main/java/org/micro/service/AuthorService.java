@@ -10,4 +10,6 @@ public interface AuthorService {
     Author findById(Integer id);
     Boolean delete(Integer id);
     Author getByName(String name);
+
+    List<Author> getAuthorsByPage(Integer limit, Integer offset);
 }

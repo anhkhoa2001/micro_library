@@ -58,4 +58,15 @@ public class BookTypeServiceImpl implements BookTypeService {
 
         return null;
     }
+
+    @Override
+    public List<BookType> getBookTypesByPage(Integer limit, Integer offset) {
+        try {
+            return bookTypeRepository.getBookTypesByPage(limit, offset);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

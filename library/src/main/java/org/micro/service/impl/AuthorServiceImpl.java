@@ -49,4 +49,15 @@ public class AuthorServiceImpl implements AuthorService {
     public Author getByName(String name) {
         return authorRepository.getAuthorByName(name);
     }
+
+    @Override
+    public List<Author> getAuthorsByPage(Integer limit, Integer offset) {
+        try {
+            return authorRepository.getAuthorsByPage(limit, offset);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

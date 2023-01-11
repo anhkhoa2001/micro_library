@@ -18,7 +18,7 @@
     "path": "/user/authority",
     "method": "POST",
     "rabbit": "rpc",
-    "role": ["ADMIN"]
+    "role": []
   }, {
     "path": "/user",
     "method": "POST",
