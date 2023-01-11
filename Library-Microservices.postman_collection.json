@@ -80,14 +80,6 @@
 						"url": "{{hostMicro}}/user/get-by-id/1"
 					},
 					"response": []
-				},
-				{
-					"name": "Get All Authority",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
 				}
 			]
 		},
@@ -98,7 +90,13 @@
 					"name": "Get All Book",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzMxNjk5MSwiZXhwIjoxNjczMzI4OTkxfQ._uhaPAO0X42ZJGHHqqtRkm-qu67vvjuvvgjzIbwOZeKyxvr-dM61ME8g-ufpQswEQ7Oru0Qkqikta9XC_rFYUQ",
+								"type": "text"
+							}
+						],
 						"url": "{{hostMicro}}/library/book"
 					},
 					"response": []
@@ -107,8 +105,30 @@
 					"name": "Get Book By ID",
 					"request": {
 						"method": "GET",
-						"header": [],
-						"url": "{{hostMicro}}/library/book"
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtMUBnbWFpbC5jb20iLCJpYXQiOjE2NzMzMTg2NjIsImV4cCI6MTY3MzMzMDY2Mn0.tHVTp5mpHMnwawIrkWtP6xEUmMRD8UKQDRnWXbFlY_fHzW2zkOQVIT4e2HI-gKQbS1Vl_xRtm_T4wW63NnXoGw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{hostMicro}}/library/book/get-by-id?id=3",
+							"host": [
+								"{{hostMicro}}"
+							],
+							"path": [
+								"library",
+								"book",
+								"get-by-id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -116,7 +136,14 @@
 					"name": "Get All Author",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtMUBnbWFpbC5jb20iLCJpYXQiOjE2NzMzMTg2NjIsImV4cCI6MTY3MzMzMDY2Mn0.tHVTp5mpHMnwawIrkWtP6xEUmMRD8UKQDRnWXbFlY_fHzW2zkOQVIT4e2HI-gKQbS1Vl_xRtm_T4wW63NnXoGw",
+								"type": "text"
+							}
+						],
+						"url": "{{hostMicro}}/library/author"
 					},
 					"response": []
 				},
@@ -139,7 +166,22 @@
 					"name": "Add Book",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzE4ODk1NywiZXhwIjoxNjczMjAwOTU3fQ.b9R0roc2GBxCSrVi-oGeUtGbpLRdtNRayp9QZ576ax89h1YJepkKbX9Y7DxZghRUs7hJjjDRkZpCGurmqAAYUQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Cô bé quàng khăn đỏ\",\r\n    \"content\": \"abcd\",\r\n    \"type_id\": 1,\r\n    \"author_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": "{{hostMicro}}/library/book"
 					},
 					"response": []
@@ -229,7 +271,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Game of thrones\",\r\n    \"content\": \"abcd\",\r\n    \"type_id\": 1,\r\n    \"author_id\": 2\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Game of thrones\",\r\n    \"content\": \"abcd\",\r\n    \"type_id\": 2,\r\n    \"author_id\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -247,13 +289,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzE4ODk1NywiZXhwIjoxNjczMjAwOTU3fQ.b9R0roc2GBxCSrVi-oGeUtGbpLRdtNRayp9QZ576ax89h1YJepkKbX9Y7DxZghRUs7hJjjDRkZpCGurmqAAYUQ",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtMTIzQGdtYWlsLmNvbSIsImlhdCI6MTY3MzQxODA5NCwiZXhwIjoxNjczNDMwMDk0fQ.-bFHV9fNlmjYaAXpiLlnpRZuWxzhZ6qjCCIssMrxRGuAzfcLSq9UuUiWgPlQdBywrb98b9ZCESQQnNtQGjItVQ",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Sách Khoa học-Viễn tưởng\"\r\n}",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"Sách tâm lý\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -271,7 +313,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzE4ODk1NywiZXhwIjoxNjczMjAwOTU3fQ.b9R0roc2GBxCSrVi-oGeUtGbpLRdtNRayp9QZ576ax89h1YJepkKbX9Y7DxZghRUs7hJjjDRkZpCGurmqAAYUQ",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtMTIzQGdtYWlsLmNvbSIsImlhdCI6MTY3MzQxODA5NCwiZXhwIjoxNjczNDMwMDk0fQ.-bFHV9fNlmjYaAXpiLlnpRZuWxzhZ6qjCCIssMrxRGuAzfcLSq9UuUiWgPlQdBywrb98b9ZCESQQnNtQGjItVQ",
 								"type": "text"
 							}
 						],
@@ -325,7 +367,7 @@
 					"response": []
 				},
 				{
-					"name": "Edit Book Type Copy",
+					"name": "Delete Book Type",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -413,13 +455,13 @@
 					"response": []
 				},
 				{
-					"name": "Report Number Most Book",
+					"name": "Report Book Number Most",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzI0NDM3OSwiZXhwIjoxNjczMjU2Mzc5fQ.424Wj4QO2kIHhQjxiqLWE1JE1CmjsV0Xoa4pHWjxXeJrFattXfuOKeCvm_a-tACZJWLaYrjsePWhu18-BENqHQ",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtMTIzQGdtYWlsLmNvbSIsImlhdCI6MTY3MzQxODA5NCwiZXhwIjoxNjczNDMwMDk0fQ.-bFHV9fNlmjYaAXpiLlnpRZuWxzhZ6qjCCIssMrxRGuAzfcLSq9UuUiWgPlQdBywrb98b9ZCESQQnNtQGjItVQ",
 								"type": "text"
 							}
 						],
