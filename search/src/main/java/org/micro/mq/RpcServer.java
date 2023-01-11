@@ -40,7 +40,6 @@ public class RpcServer {
                 String pathParam = request.getPathParam();
                 Map<String, Object> bodyParam = request.getBodyParam();
                 Map<String, String> headerParam = request.getHeaderParam();
-                Set<String> role = request.getRole();
                 log.info(" [-->] Server received requestPath =========>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + requestPath);
 
                 switch (request.getRequestMethod()) {
