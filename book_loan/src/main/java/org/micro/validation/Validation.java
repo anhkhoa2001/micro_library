@@ -24,7 +24,7 @@ public class Validation {
     @Autowired
     private RabbitMQClient client;
 
-    private final String USER_URL_AUTHENTICATION = "/api/user/authorization";
+    private final String USER_URL_AUTHENTICATION = "/api/user/authentication";
     private final String LIBRARY_URL_GET_BY_ID = "/api/library/book/get-by-id";
 
     public AuthorizationDTO validateHeader(Map<String, String> headerParam) {
@@ -123,11 +123,9 @@ public class Validation {
                     return null;
                 }
             } else {
-                //Forbidden
                 return null;
             }
         } else {
-            //Forbidden
             return null;
         }
         return null;

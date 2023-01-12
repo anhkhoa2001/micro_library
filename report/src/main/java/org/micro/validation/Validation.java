@@ -22,10 +22,9 @@ import java.util.Map;
 public class Validation {
     @Autowired
     private RabbitMQClient client;
-    private final String USER_URL_AUTHENTICATION = "/api/user/authorization";
+    private final String USER_URL_AUTHENTICATION = "/api/user/authentication";
 
     public AuthorizationDTO validateHeader(Map<String, String> headerParam) {
-        //Authen -> call rpc authen headerMap
         RequestMessage userRpcRequest = new RequestMessage();
         userRpcRequest.setRequestMethod("POST");
         userRpcRequest.setRequestPath(USER_URL_AUTHENTICATION);
@@ -66,11 +65,9 @@ public class Validation {
                     return null;
                 }
             } else {
-                //Forbidden
                 return null;
             }
         } else {
-            //Forbidden
             return null;
         }
         return null;

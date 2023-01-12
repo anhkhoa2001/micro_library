@@ -11,26 +11,23 @@ import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 public class GatewayConfig {
 
-    //Typesafe config
     public static final String CONFIG_DIR = System.getProperty("user.dir") + File.separator + "gateway"
                                     + File.separator + "config" + File.separator;
 
-    //Constant root api path
     public static final String API_ROOT_PATH = ResourcePath.API + "/";
     
-    //Time out khi call RPC (s)
     public static Integer RPC_TIMEOUT = 5;
     
-    //List mã dịch vụ
     public static List<String> SERVICE_LIST = new ArrayList<>();
     
-    //Map chứa các key,value ngoài các map định nghĩa bên dưới
     public static final Map<String, String> SERVICE_MAP = new HashMap<>();
     
-    //Map chứa list path
     public static final Map<String, RabbitMapper> SERVICE_PATH_MAP = new HashMap<>();
+
+    public static final Set<String> SERVICE_PATH_SET_PRIVATE = new HashSet<>();
 
     static {
         loadConfig();
@@ -41,7 +38,7 @@ public class GatewayConfig {
             System.out.println("======= Loading GatewayConfig config... =======");
             Properties properties = new Properties();
             properties.load(new InputStreamReader(new FileInputStream(CONFIG_DIR + "gateway.properties"), "UTF-8"));
-            Enumeration e = properties.propertyNames();
+            Enumeration<?> e = properties.propertyNames();
 
             while (e.hasMoreElements()) {
                 String key = (String) e.nextElement();
@@ -63,13 +60,7 @@ public class GatewayConfig {
                         if(!value.isEmpty()) {
                             String[] arrPrivatePath = value.split(",");
                             List<String> pathPrivates = Arrays.asList(arrPrivatePath);
-                            for(String path:pathPrivates) {
-                                RabbitMapper rabbitMapper = SERVICE_PATH_MAP.get(path);
-                                if(rabbitMapper != null) {
-                                    rabbitMapper.setAccess(true);
-                                    SERVICE_PATH_MAP.put(path, rabbitMapper);
-                                }
-                            }
+                            SERVICE_PATH_SET_PRIVATE.addAll(pathPrivates);
                         }
                     }
                 }
@@ -90,9 +81,8 @@ public class GatewayConfig {
                     RabbitMapper rabbitMapper = new RabbitMapper();
                     rabbitMapper.setRabbit_type(tmp.getRabbit());
                     rabbitMapper.setMethod(tmp.getMethod());
-                    rabbitMapper.setAccess(false);
-                    rabbitMapper.setRole(tmp.getRole());
-                    SERVICE_PATH_MAP.put(tmp.getPath(), rabbitMapper);
+                    SERVICE_PATH_MAP.put(tmp.getPath() + "  " + tmp.getMethod(), rabbitMapper);
+                    System.out.println(tmp.getPath() + " ===== " + tmp.getMethod());
                 });
             }
         } catch (FileNotFoundException ex) {

@@ -33,10 +33,8 @@ public class LoginController {
     private JwtTokenSetup jwt;
     @Autowired
     private UserService userService;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private AuthorityService authorityService;
 

@@ -44,7 +44,23 @@
 					"name": "Add Authority",
 					"request": {
 						"method": "POST",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtQGdtYWlsLmNvbSIsImlhdCI6MTY3MzE3ODI1OCwiZXhwIjoxNjczMTkwMjU4fQ.dpGJjJQWtYaSJbMRKPhE_rux4DTQOFdt9RHv0RBCcLUg9mvSOk7vjgb8-JKTCWqPgm8zPxKVNSNUac7NwTnBCg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"MANAGER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{hostMicro}}/user/authority"
 					},
 					"response": []
 				},
@@ -78,6 +94,21 @@
 						"method": "GET",
 						"header": [],
 						"url": "{{hostMicro}}/user/get-by-id/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Authorization",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraG9hZGFtdGFtMUBnbWFpbC5jb20iLCJpYXQiOjE2NzM0ODc4MDksImV4cCI6MTY3MzQ5OTgwOX0.Lyts6AnTe-XmGlc2F0Z5B3gYnwGNy35qNENUiAUBMsBcLCCv751yMolhD8ct7rg3u7jMYIPiYkg0qFvlJX75nQ",
+								"type": "text"
+							}
+						],
+						"url": "{{hostMicro}}/user/authentication"
 					},
 					"response": []
 				}

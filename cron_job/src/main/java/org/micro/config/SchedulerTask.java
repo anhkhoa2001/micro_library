@@ -27,7 +27,7 @@ public class SchedulerTask {
     @Autowired
     private RabbitMQClient client;
 
-    //chạy lúc 0 giờ mỗi ngày để gửi mail
+    //chạy lúc 0 giờ mỗi ngày để kiểm trả log quá hạn để gửi mail
     @Scheduled(cron = "0 0 0 * * *")
     public void doit() {
         Set<BorrowBookDTO> dtos = new HashSet<>(jobService.getAllBorrow());

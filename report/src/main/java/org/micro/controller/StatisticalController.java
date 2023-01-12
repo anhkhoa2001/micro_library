@@ -116,7 +116,7 @@ public class StatisticalController {
                     response = new ResponseMessage(HttpStatus.NO_CONTENT.value(), "Không có dữ liệu",
                             new MessageContent(HttpStatus.NO_CONTENT.value(), "Không có dữ liệu", null));
                 } else {
-                    return new ResponseMessage(new MessageContent(l));
+                    return new ResponseMessage(new MessageContent("Tổng số sách mượn là: " + l + " quyển"));
                 }
             }
         }

@@ -1,13 +1,16 @@
 package org.micro.model;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "mu_authority")
-@Data
+@Getter
+@Setter
 public class Authority implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +26,6 @@ public class Authority implements GrantedAuthority {
     public Authority() {
 
     }
-
-
-
     @Override
     public String getAuthority() {
         return authority;

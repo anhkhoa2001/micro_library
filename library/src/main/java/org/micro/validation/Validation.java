@@ -11,6 +11,7 @@ import org.micro.service.BookService;
 import org.micro.service.BookTypeService;
 import org.micro.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -32,14 +33,17 @@ public class Validation {
     @Autowired
     private BookTypeService bookTypeService;
 
+    @Value("${micro.url.authorization}")
+    private String USER_URL_AUTHORICATION;
 
-    private final String USER_URL_AUTHENTICATION = "/api/user/authorization";
+    @Value("${micro.url.method}")
+    private String USER_METHOD_AUTHORICATION;
 
     public AuthorizationDTO validateHeader(Map<String, String> headerParam) {
         //Authen -> call rpc authen headerMap
         RequestMessage userRpcRequest = new RequestMessage();
-        userRpcRequest.setRequestMethod("POST");
-        userRpcRequest.setRequestPath(USER_URL_AUTHENTICATION);
+        userRpcRequest.setRequestMethod(USER_METHOD_AUTHORICATION);
+        userRpcRequest.setRequestPath(USER_URL_AUTHORICATION);
         userRpcRequest.setBodyParam(null);
         userRpcRequest.setUrlParam(null);
         userRpcRequest.setHeaderParam(headerParam);

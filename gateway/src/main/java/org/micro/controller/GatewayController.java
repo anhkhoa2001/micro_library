@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Map;
-import java.util.Set;
 
 @RestController
 @RequestMapping(value = ResourcePath.API)
@@ -105,7 +104,7 @@ public class GatewayController {
         log.info("[{}] to requestPath: {} - urlParam: {} - pathParm: {} - bodyParam: {} - headerParam: {}",
                 requestMethod, requestPath, urlParamMap, pathParam, bodyParamMap, headerParamMap);
         //Validate url
-        String invalidData = new GatewayValidation().validate(requestPath, service);
+        String invalidData = new GatewayValidation().validate(requestPath, service, requestMethod);
 
         if (invalidData != null) {
             ResponseMessage responseMessage = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), invalidData, null);
@@ -118,8 +117,7 @@ public class GatewayController {
             String result = null;
 
             //Get rabbit type from url
-            String rabbitType = GatewayConfig.SERVICE_PATH_MAP.get(requestPath).getRabbit_type();
-            Set<String> role = GatewayConfig.SERVICE_PATH_MAP.get(requestPath).getRole();
+            String rabbitType = GatewayConfig.SERVICE_PATH_MAP.get(requestPath + "  " + requestMethod).getRabbit_type();
             RequestMessage request = new RequestMessage(requestMethod, requestPath,
                     urlParamMap, pathParam, bodyParamMap, headerParamMap);
             log.info("Get Rabbit type for {} {} ==> Rabbit: {}", requestMethod,
@@ -168,6 +166,7 @@ public class GatewayController {
                 }
             }
 
+            //return
             if (result != null) {
                 ObjectMapper mapper = new ObjectMapper();
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -177,7 +176,7 @@ public class GatewayController {
             }
             ResponseMessage responseMessage = new ResponseMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.toString(), null);
             result = responseMessage.toJsonString();
-            return new ResponseEntity<>(result, HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -1,6 +1,5 @@
 package org.micro.config;
 
-import org.micro.config.token.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Lazy;
@@ -18,10 +17,6 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @ComponentScan("org.micro.controller")
 public class WebSecurityConfig {
 
-    @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter();
-    }
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -44,10 +39,6 @@ public class WebSecurityConfig {
        /* http.cors().and().authorizeRequests().anyRequest().permitAll()
                 .and().csrf().disable();*/
         http.cors().and().authorizeRequests().anyRequest().permitAll();
-
-        //xac thuc jwt
-        http.addFilterAt(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .csrf().disable();
         return http.build();
     }
 }

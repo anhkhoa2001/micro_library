@@ -59,7 +59,7 @@ public class RpcServer {
                             response = loginController.register(requestPath, headerParam, bodyParam);
                         } else if("/user/authority".equalsIgnoreCase(requestPath)) {
                             response = loginController.addAuthority(requestPath, headerParam, bodyParam);
-                        } else if("/user/authorization".equalsIgnoreCase(requestPath)) {
+                        } else if("/user/authentication".equalsIgnoreCase(requestPath)) {
                             response = loginController.authorization(requestPath, headerParam);
                         } else if("/user".equalsIgnoreCase(requestPath)) {
                             response = userController.getAllUser(requestPath, headerParam, bodyParam);
