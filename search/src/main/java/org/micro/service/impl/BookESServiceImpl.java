@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class BookESServiceImpl implements BookESService {
 
-    private final String USER_URL_AUTHENTICATION = "/api/user/authorization";
+    private final String USER_URL_AUTHENTICATION = "/api/user/authentication";
     private final String LIBRARY_URL_GET_ALL_BOOK = "/api/library/book";
     private final String LIBRARY_URL_GET_ALL_AUTHOR = "/api/library/author";
     private final String LIBRARY_URL_GET_ALL_BOOK_TYPE = "/api/library/book-type";

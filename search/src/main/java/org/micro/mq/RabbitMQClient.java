@@ -17,12 +17,10 @@ public class RabbitMQClient {
         try {
             log.info("callRpcService - exchangeName: {}, queueName: {}, key : {}, msg: {}",
                     exchangeName, queueName, key, msg);
-            //Send msg
             MessageProperties messageProperties = new MessageProperties();
             messageProperties.setContentType(MessageProperties.CONTENT_TYPE_JSON);
             Message message = new Message(msg.getBytes("UTF-8"), messageProperties);
             Object obj = amqpTemplate.convertSendAndReceive(exchangeName, key, message);
-            System.out.println(obj);
             return (String) obj;
         } catch (Exception ex) {
             log.error("callRpcService Exception >>> " + ex.toString());
@@ -35,7 +33,6 @@ public class RabbitMQClient {
         log.info("callPublishService - exchangeName: {}, key : {}", exchangeName, key);
 
         try {
-            //Send msg
             MessageProperties messageProperties = new MessageProperties();
             messageProperties.setContentType(MessageProperties.CONTENT_TYPE_JSON);
             Message message = new Message(msg.getBytes("UTF-8"), messageProperties);
@@ -52,7 +49,6 @@ public class RabbitMQClient {
         log.info("callWorkerService - queueName : {}", queueName);
 
         try {
-            //Send msg
             MessageProperties messageProperties = new MessageProperties();
             messageProperties.setContentType(MessageProperties.CONTENT_TYPE_JSON);
             Message message = new Message(msg.getBytes("UTF-8"), messageProperties);

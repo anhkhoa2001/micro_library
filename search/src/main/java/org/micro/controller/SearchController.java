@@ -29,8 +29,8 @@ public class SearchController {
             List<AuthorDTO> authorDTOs = bookESService.getAllAuthorOnLibrary(headerParam);
             List<BookTypeDTO> bookTypeDTOs = bookESService.getAllBookTypeOnLibrary(headerParam);
             if(bookDTOs == null || authorDTOs == null || bookTypeDTOs == null) {
-                response = new ResponseMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Lấy sách từ library service bị lỗi",
-                        new MessageContent(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Lấy sách từ library service bị lỗi", null));
+                response = new ResponseMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Lấy thông tin từ library service bị lỗi",
+                        new MessageContent(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Lấy thông tin từ library service bị lỗi", null));
 
             } else if(bookDTOs.isEmpty() || authorDTOs.isEmpty() || bookTypeDTOs.isEmpty()) {
                 response = new ResponseMessage(HttpStatus.NO_CONTENT.value(), "Không có dữ liệu để đồng bộ",
