@@ -1,0 +1,133 @@
+version: "3.9"
+
+services:
+  micro-app:
+    image: micro/cron_job
+    build:
+      context: .
+      dockerfile: cron_job/Dockerfile
+    restart: always
+    ports:
+      - "8096:8096"
+    depends_on:
+      - micro_report
+      - micro_search
+  micro_report:
+    image: micro/report
+    restart: always
+    build:
+      context: .
+      dockerfile: report/Dockerfile
+    ports:
+      - "8095:8095"
+    depends_on:
+      - micro_book_loan
+  micro_search:
+    image: micro/search
+    restart: always
+    build:
+      context: .
+      dockerfile: search/Dockerfile
+    ports:
+      - "8093:8093"
+    depends_on:
+      - elastic
+      - micro_library
+  micro_book_loan:
+    image: micro/book_loan
+    restart: always
+    build:
+      context: .
+      dockerfile: book_loan/Dockerfile
+    ports:
+      - "8094:8094"
+    depends_on:
+      - micro_library
+      - dbbookloan
+  micro_library:
+    image: micro/library
+    restart: always
+    build:
+      context: .
+      dockerfile: library/Dockerfile
+    ports:
+      - "8092:8092"
+    depends_on:
+      - dblibrary
+      - micro_user
+  micro_user:
+    image: micro/user
+    restart: always
+    build:
+      context: .
+      dockerfile: user/Dockerfile
+    ports:
+      - "8091:8091"
+    depends_on:
+      - dbuser
+      - micro_gateway
+  micro_gateway:
+    image: micro/gateway
+    restart: always
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    ports:
+      - "8090:8090"
+    depends_on:
+      - rabbitmq1
+  dbuser:
+    image: "mysql:8.0"
+    container_name: micro_user
+    environment:
+      MYSQL_ROOT_PASSWORD: 1
+      MYSQL_USER: micro_user
+      MYSQL_PASSWORD: 1
+      MYSQL_DATABASE: micro_user
+    ports:
+      - 3320:3306
+    volumes:
+      - myvol:/var/bin/dbuser
+  dblibrary:
+    image: "mysql:8.0"
+    container_name: micro_library
+    environment:
+      MYSQL_ROOT_PASSWORD: 1
+      MYSQL_USER: micro_library
+      MYSQL_PASSWORD: 1
+      MYSQL_DATABASE: micro_library
+    ports:
+      - 3321:3306
+    volumes:
+      - myvol:/var/bin/dblibrary
+  dbbookloan:
+    image: "postgres:13.1"
+    environment:
+      POSTGRES_USER: micro_book_loan
+      POSTGRES_PASSWORD: 1
+      POSTGRES_DB: micro_book_loan
+    ports:
+      - 5434:5432
+    volumes:
+      - myvol:/var/bin/book_loan
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
+    restart: always
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - myvol:/var/bin/elasticsearch
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  rabbitmq1:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+volumes:
+  myvol:
+    name: micronetwork
+

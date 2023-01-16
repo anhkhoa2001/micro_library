@@ -65,7 +65,6 @@ public class RabbitMQConfig {
     @Bean
     public void initAllQueue() {
         log.info("Initing all rpc, pub/sub and worker queue...");
-        /* RPC */
         AmqpAdmin amqpAdmin = rabbitAdmin();
         Queue directAutoDeleteQueue = directAutoDeleteQueue();
         List<String> serviceList = GatewayConfig.SERVICE_LIST;

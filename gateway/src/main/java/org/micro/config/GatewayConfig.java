@@ -14,8 +14,15 @@ import java.util.logging.Logger;
 
 public class GatewayConfig {
 
-    public static final String CONFIG_DIR = System.getProperty("user.dir") + File.separator + "gateway"
+    public static final String  CONFIG_DIR = System.getProperty("user.dir")
                                     + File.separator + "config" + File.separator;
+
+
+    /*public static final String  = System.getProperty("user.dir") + File.separator + "gateway"
+            + File.separator + "config" + File.separator;*/
+
+ /*   public static final String CONFIG_DIR = System.getProperty("user.dir") + File.separator
+                            + "config" + File.separator;*/
 
     public static final String API_ROOT_PATH = ResourcePath.API + "/";
     
@@ -35,6 +42,18 @@ public class GatewayConfig {
 
     private static void loadConfig() {
         try {
+            /*
+            File directory = new File(CONFIG_DIR);
+            File[] files = directory.listFiles();
+            if (files != null && files.length > 0) {
+                for(File f:files) {
+                    System.out.println(f.getName());
+                }
+                System.out.println("The directory contains files.");
+                System.out.println("============================================================");
+            } else {
+                System.out.println("The directory is empty.");
+            }*/
             System.out.println("======= Loading GatewayConfig config... =======");
             Properties properties = new Properties();
             properties.load(new InputStreamReader(new FileInputStream(CONFIG_DIR + "gateway.properties"), "UTF-8"));

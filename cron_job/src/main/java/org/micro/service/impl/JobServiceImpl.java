@@ -20,7 +20,7 @@ public class JobServiceImpl implements JobService {
     private final String USER_URL_LOGIN = "/api/user/login";
     private final String BOOK_LOAN_URL_GET_ALL = "/api/book_loan/borrow_book";
     private final String USER_URL_GET_ALL = "/api/user/get-by-id";
-    private final String LIBRARY_URL_GET_BY_IDS = "/api/library/book/get-by-id";
+    private final String LIBRARY_URL_GET_BY_ID = "/api/library/book/get-by-id";
     @Autowired
     private RabbitMQClient client;
 
@@ -73,7 +73,7 @@ public class JobServiceImpl implements JobService {
                         }
                     }
                 } catch (Exception ex) {
-                    log.info("Lỗi giải mã getAllBorrow khi gọi user service verify: " + ex.toString());
+                    log.info("Lỗi giải mã getAllBorrow khi gọi book loan service verify: " + ex.toString());
                     return null;
                 }
             } else {
@@ -145,7 +145,7 @@ public class JobServiceImpl implements JobService {
         String token = autoAuthorization();
         RequestMessage userRpcRequest = new RequestMessage();
         userRpcRequest.setRequestMethod("GET");
-        userRpcRequest.setRequestPath(LIBRARY_URL_GET_BY_IDS);
+        userRpcRequest.setRequestPath(LIBRARY_URL_GET_BY_ID);
         userRpcRequest.setUrlParam(null);
         Map<String, String> headerParam = new HashMap<>();
         Map<String, String> urlParam = new HashMap<>();
@@ -155,7 +155,7 @@ public class JobServiceImpl implements JobService {
         userRpcRequest.setUrlParam(urlParam);
         String result = client.callRpcService(RabbitMQProperties.LIBRARY_RPC_EXCHANGE,
                 RabbitMQProperties.LIBRARY_RPC_QUEUE, RabbitMQProperties.LIBRARY_RPC_KEY, userRpcRequest.toJsonString());
-        log.info(" get all book by ids - result: " + result);
+        log.info(" get book by id - result: " + result);
         if (result != null) {
             ObjectMapper mapper = new ObjectMapper();
             ResponseMessage response = null;
@@ -173,13 +173,6 @@ public class JobServiceImpl implements JobService {
                     Object data = content.getData();
                     if (data != null) {
                         BookDTO dto = null;
-                        /*if (data.getClass() == ArrayList.class) {
-                            dtos = new ArrayList<>();
-                            List<LinkedHashMap> list = (List<LinkedHashMap>) data;
-                            for(LinkedHashMap l:list) {
-                                dtos.add(new BookDTO(l));
-                            }
-                        }*/
                         if(data.getClass() == BookDTO.class) {
                             dto = (BookDTO) data;
                         } else if(data.getClass() == LinkedHashMap.class) {
@@ -229,7 +222,6 @@ public class JobServiceImpl implements JobService {
                 return null;
             }
         } else {
-            //Forbidden
             return null;
         }
         return null;

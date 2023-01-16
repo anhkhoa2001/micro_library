@@ -30,6 +30,11 @@ public class GatewayController {
     @Autowired
     private RabbitMQClient rabbitMQClient;
 
+    /*@GetMapping
+    public String test() {
+        return "khoa dep trai vl";
+    }*/
+
     //GET
     @RequestMapping(value = "**", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getMethod(@RequestParam Map<String, String> reqParam,
@@ -44,6 +49,7 @@ public class GatewayController {
                                              @RequestBody(required = false) Map<String, Object> requestBody,
                                              @RequestHeader Map<String, String> headers,
                                              HttpServletRequest req) throws JsonProcessingException {
+        log.error("da di vao day ===============================================================================================================");
         return processRequest("POST", reqParam, requestBody, headers, req);
     }
 

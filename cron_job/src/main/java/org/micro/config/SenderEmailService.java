@@ -14,8 +14,7 @@ public class SenderEmailService {
     @Value("${email.from}")
     private String emailFrom;
 
-    public void sendSimpleEmail(String body,
-                                String subject, String emailTo) {
+    public void sendSimpleEmail(String body, String subject, String emailTo) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(emailFrom);
         message.setTo(emailTo);

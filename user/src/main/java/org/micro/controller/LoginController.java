@@ -92,10 +92,21 @@ public class LoginController {
             response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "Thêm thông tin tài khoản vào body",
                     new MessageContent(HttpStatus.BAD_REQUEST.value(), "Thêm thông tin tài khoản vào body", null));
         }
-        String username = (String) bodyParam.get("username");
-        String password = (String) bodyParam.get("password");
-        Set<Integer> authories = new HashSet<>((List<Integer>) bodyParam.get("authories"));
-        String message = new UserValidation().validateRegister(username, password, authories, authorityService);
+        String message = null;
+        String username = null;
+        String password = null;
+        Set<Integer> authories = new HashSet<>();
+        try {
+            username = (String) bodyParam.get("username");
+            password = (String) bodyParam.get("password");
+            authories = new HashSet<>((List<Integer>) bodyParam.get("authories"));
+            message = new UserValidation().validateRegister(username, password, authories, authorityService);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            message = "Dữ liệu body không hợp lệ";
+            return new ResponseMessage(HttpStatus.NOT_FOUND.value(), message,
+                    new MessageContent(HttpStatus.NOT_FOUND.value(), message, null));
+        }
         if (message != null) {
             response = new ResponseMessage(HttpStatus.BAD_REQUEST.value(), message,
                     new MessageContent(HttpStatus.BAD_REQUEST.value(), message, null));
