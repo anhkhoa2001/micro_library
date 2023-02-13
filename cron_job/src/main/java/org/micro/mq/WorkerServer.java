@@ -3,7 +3,6 @@ package org.micro.mq;
 import lombok.extern.slf4j.Slf4j;
 import org.micro.config.SchedulerTask;
 import org.micro.config.SenderEmailService;
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,7 +30,7 @@ public class WorkerServer {
             log.info("Gửi mail thành công vào " + email);
         } catch (Exception e) {
             log.error(e.getMessage());
-            log.error("Thông tin email không hợp lệ");
+            log.error("Gửi email thất bại");
         }
 
     }

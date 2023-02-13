@@ -14,12 +14,12 @@ import java.util.logging.Logger;
 
 public class GatewayConfig {
 
-    public static final String  CONFIG_DIR = System.getProperty("user.dir")
-                                    + File.separator + "config" + File.separator;
+//    public static final String  CONFIG_DIR = System.getProperty("user.dir")
+//                                    + File.separator + "config" + File.separator;
 
 
-    /*public static final String  = System.getProperty("user.dir") + File.separator + "gateway"
-            + File.separator + "config" + File.separator;*/
+    public static final String CONFIG_DIR = System.getProperty("user.dir") + File.separator + "gateway"
+            + File.separator + "config" + File.separator;
 
  /*   public static final String CONFIG_DIR = System.getProperty("user.dir") + File.separator
                             + "config" + File.separator;*/

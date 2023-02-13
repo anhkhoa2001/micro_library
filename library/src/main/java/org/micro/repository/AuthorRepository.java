@@ -14,4 +14,5 @@ public interface AuthorRepository extends JpaRepository<Author, Integer> {
     Author getAuthorByName(String name);
     @Query(value="select * from rest_author lb limit :lim offset :off", nativeQuery=true)
     List<Author> getAuthorsByPage(@Param("lim") Integer limit, @Param("off") Integer offset);
+
 }
