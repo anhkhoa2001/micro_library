@@ -78,7 +78,7 @@ public class LoginController {
                 } else {
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                     String token = jwt.generateToken(userDetail);
-                    response = new ResponseMessage(new MessageContent(new ResponseAuthentication(username, token, "Đang hoạt động!!!")));
+                    response = new ResponseMessage(new MessageContent(new ResponseAuthentication(token, username, "Đang hoạt động!!!")));
                 }
             }
         }

@@ -11,7 +11,6 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 @Slf4j
 public class UserServiceApplication {
     public static void main(String[] args) {
-        log.info("================================= da chay user =====================================================");
         new SpringApplicationBuilder(UserServiceApplication.class).web(WebApplicationType.NONE).run(args);
     }
 }
